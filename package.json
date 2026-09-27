@@ -1,0 +1,13 @@
+{
+  "name": "stepx-autofill",
+  "version": "1.0.0",
+  "description": "Chrome/Edge Manifest V3 extension for autofilling recurring STEPX Microsoft Forms.",
+  "scripts": {
+    "test": "node --test test/extension.test.js",
+    "generate-icons": "node scripts/generate-icons.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  },
+  "private": true
+}

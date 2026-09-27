@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STEPX AutoFill</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-badge" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>STEPX AutoFill</h1>
+          <span class="version-tag">Attendance Assistant</span>
+        </div>
+      </div>
+      <div class="status-indicator-dot" title="Active on Microsoft Forms"></div>
+    </header>
+
+    <!-- Setup banner (shown when no credentials saved) -->
+    <div id="setup-banner" class="banner banner-warning" role="alert" hidden>
+      <div class="banner-icon">ℹ</div>
+      <div class="banner-text">
+        <strong>Setup required</strong>
+        <span>Save your details once to enable instant autofill on attendance forms.</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="details-form" novalidate>
+      <div class="form-group">
+        <label for="name">
+          <span>Full Name</span>
+          <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <input id="name" name="name" type="text" placeholder="e.g. Alex Johnson" autocomplete="name" required spellcheck="false">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">
+          <span>College Email ID</span>
+          <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <input id="email" name="email" type="email" placeholder="e.g. student@college.edu" autocomplete="email" required spellcheck="false">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="usn">
+          <span>USN Number</span>
+          <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <input id="usn" name="usn" type="text" placeholder="e.g. 1SV22CS045" autocomplete="off" required spellcheck="false">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">
+          <span>Mobile Number</span>
+          <span class="required-star">*</span>
+        </label>
+        <div class="input-wrapper">
+          <input id="phone" name="phone" type="tel" placeholder="e.g. 9876543210" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label id="attendance-legend">
+          <span>Are you attending the session?</span>
+          <span class="required-star">*</span>
+        </label>
+        <div class="segmented-control" role="radiogroup" aria-labelledby="attendance-legend">
+          <label class="segmented-option">
+            <input type="radio" name="attendance" value="Yes" required>
+            <span class="segment-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Yes
+            </span>
+          </label>
+          <label class="segmented-option">
+            <input type="radio" name="attendance" value="No" required>
+            <span class="segment-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+              No
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Action & Status -->
+      <div class="action-section">
+        <button type="submit" id="save-btn" class="primary-btn">
+          <span class="btn-text">Save Details</span>
+          <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+        </button>
+        <button type="button" id="manual-fill-btn" class="secondary-btn">
+          <span class="btn-text">Fill Current Form</span>
+          <svg class="btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+          </svg>
+        </button>
+        <div id="form-status" class="status-msg" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+
+    <footer class="footer">
+      <div class="security-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Stored locally on this device · Never submitted automatically</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

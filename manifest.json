@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "STEPX AutoFill",
+  "version": "1.0.0",
+  "description": "Autofill recurring Microsoft Forms for STEPX attendance. Review and submit manually.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://forms.cloud.microsoft/*",
+    "https://forms.office.com/*",
+    "https://forms.microsoft.com/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "STEPX AutoFill",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://forms.cloud.microsoft/*",
+        "https://forms.office.com/*",
+        "https://forms.microsoft.com/*"
+      ],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
